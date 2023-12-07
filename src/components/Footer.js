@@ -1,4 +1,5 @@
 import React from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const scrollToTop = () => {
   window.scrollTo({
@@ -8,9 +9,20 @@ const scrollToTop = () => {
 };
 
 const Footer = () => {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleBack = () => {
+    navigate(-1);
+  };
+
   return (
     <footer>
-      <button onClick={scrollToTop}>Back to Top</button>
+      {location.pathname === "/" ? (
+        <button onClick={scrollToTop}>Back to Top</button>
+      ) : (
+        <button onClick={handleBack}>Back</button>
+      )}
     </footer>
   );
 };
