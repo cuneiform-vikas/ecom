@@ -1,5 +1,8 @@
+@import url("https://fonts.googleapis.com/css2?family=Holtwood+One+SC&family=Quicksand:wght@300;400;500;600;700&display=swap");
+
 * {
   box-sizing: border-box;
+  font-family: "Quicksand", sans-serif;
 }
 
 html,
@@ -12,7 +15,6 @@ body {
 body {
   margin: 0;
   padding: 0;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 #root {
@@ -33,38 +35,8 @@ a:hover {
   text-decoration: underline;
 }
 
-/* _____Main Container_______ */
-#root .App {
-  height: 100%;
-  width: 100%;
-  max-width: 1280px;
-  margin: 0 auto;
-}
-
-.App section {
-  margin: 1rem;
-  padding: 1rem;
-  background-color: rgb(171 182 183);
-}
-/* _____/// Navbar Styles ///________ */
-.App header {
-  margin: 1rem;
-}
-
-header nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 0;
-}
-
-nav .logo {
-  font-size: 1.5rem;
-}
-
-/* ________Cart button_______ */
-nav button {
-  position: relative;
+/* _______Utility Classes_____ */
+button.outline {
   padding: 0.3rem 0.5rem;
   display: flex;
   justify-content: center;
@@ -79,14 +51,51 @@ nav button {
   cursor: pointer;
 }
 
-nav button:hover {
+button.outline:hover {
   color: white;
   background-color: rgb(32, 32, 32);
   fill: white;
 }
 
-/* ____Cart Badge______ */
-button span {
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* _____Main Container_______ */
+#root .App {
+  height: 100%;
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.App section {
+  margin: 1rem;
+  padding: 1rem;
+  background-color: rgb(171 182 183);
+}
+
+/* _____/// Navbar Styles ///________ */
+.App header {
+  margin: 1rem;
+}
+
+header nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+nav .logo {
+  font-size: 1.5rem;
+  font-family: "Holtwood One SC", serif;
+}
+
+/* ____Button Badge______ */
+span.badge {
   position: absolute;
   color: white;
   font-size: small;
@@ -102,40 +111,52 @@ button span {
 }
 
 /* ________Cart Window____ */
-.cart-container {
+nav .cart-container {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
 }
 
 .cart-container .cart {
-  max-width: 480px;
-  max-height: 320px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100%;
   padding: 1rem;
   background-color: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  overflow-y: scroll;
+  box-shadow: 0 0 10px rgb(39, 38, 38);
+  overflow-y: auto;
+  overflow-x: hidden;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  z-index: 1;
 }
 
-.cart-item {
+/* Hiding Scrollbar */
+.cart-container .cart::-webkit-scrollbar {
+  display: none; /* for chrome, safari and opera */
+}
+
+.cart .cart-item {
   display: flex;
+  align-items: center;
+  padding: 1rem;
   gap: 1rem;
-  justify-content: space-between;
-  align-items: flex-end;
-  padding: 1rem 0;
   border-bottom: 1px solid rgb(32, 32, 32);
 }
 
 .cart-item img {
-  width: 100px;
-  height: 100px;
+  width: 8rem;
+  height: 8rem;
+  object-fit: cover;
+}
+
+.cart-item > div {
+  flex: 1;
 }
 
 /* ________/// Product List Styles ///________ */
@@ -171,6 +192,7 @@ section .products-list {
 /* ______/// Product Details Styles ///_______ */
 section .product-details {
   display: flex;
+  flex-wrap: wrap;
   align-items: flex-start;
   justify-content: space-evenly;
   gap: 1rem;
@@ -185,20 +207,45 @@ section .product-details {
   box-shadow: inset;
 }
 
-.product-details div button {
-  background: none;
-  padding: 0.25rem 0.3rem;
-  border: 1px solid black;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: small;
-  font-weight: bold;
-  text-transform: uppercase;
+.product-details .count {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
 }
 
-.product-details div button:hover {
-  background-color: rgb(32, 32, 32);
-  color: white;
+.count h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 0 1rem;
+}
+
+
+/* ____/// Shopping Bag Styles ///_______ */
+section .shopping-bag {
+  padding: 0 1rem;
+}
+
+.shopping-bag .shopping-item {
+  padding: 1rem 0;
+  border-bottom: 1px solid rgb(32, 32, 32);
+}
+
+.shopping-bag img {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.shopping-bag > div {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.shopping-bag .desc {
+  flex: 1 1 60%;
 }
 
 /* ________/// Footer Styles ///________ */
