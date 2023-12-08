@@ -38,7 +38,9 @@ const Product = () => {
               >
                 -
               </button>
+
               <h1>{count}</h1>
+
               <button onClick={() => setCount(count + 1)} className="outline">
                 +
               </button>

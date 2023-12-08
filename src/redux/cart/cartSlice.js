@@ -13,10 +13,12 @@ export const cartSlice = createSlice({
 
       if (existingItem) {
         state.cart = state.cart.map((item) =>
-          item.id === payload.id ? { ...item, count: item.count + 1 } : item
+          item.id === payload.id
+            ? { ...item, count: item.count + payload.count }
+            : item
         );
       } else {
-        state.cart = [...state.cart, { ...payload, count: 1 }];
+        state.cart = [...state.cart, { ...payload }];
       }
     },
     removeFromCart: (state, { payload }) => {
