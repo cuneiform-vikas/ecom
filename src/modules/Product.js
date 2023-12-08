@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { selectProducts } from "../redux/products/productsSlice";
 import { addToCart } from "../redux/cart/cartSlice";
 
 const Product = () => {
+  const [count, setCount] = useState(1);
   const products = useSelector(selectProducts);
   const dispatch = useDispatch();
 
@@ -12,9 +13,11 @@ const Product = () => {
   const num = parseInt(id);
 
   const product = products.find((product) => product.id === num);
+  const navigate = useNavigate();
 
   const handleClick = () => {
-    dispatch(addToCart(product));
+    dispatch(addToCart({ ...product, count }));
+    navigate("/cart");
   };
 
   return (
@@ -28,7 +31,22 @@ const Product = () => {
             <p>Price : {product.price}/-</p>
             <p>Category : {product.category}</p>
 
-            <button onClick={handleClick}>Add to Cart</button>
+            <div className="count">
+              <button
+                onClick={() => setCount(Math.max(count - 1, 1))}
+                className="outline"
+              >
+                -
+              </button>
+              <h1>{count}</h1>
+              <button onClick={() => setCount(count + 1)} className="outline">
+                +
+              </button>
+            </div>
+
+            <button onClick={handleClick} className="outline">
+              Add to Cart
+            </button>
           </div>
         </div>
       ) : (
